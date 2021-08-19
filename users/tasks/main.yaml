@@ -9,8 +9,16 @@
     name: "{{item.name}}"
     uid: "{{item.uid}}"
     state: present
-    group: "cloudadmins,wheel"
+    group: cloudadmins,wheel
+    append: true
     home: /home/"{{item.name}}"
+
+  loop: "{{userlist}}"
+
+- name: Creates a ssh directory
+  file:
+    path: /home/"{{item.name}}"/.ssh
+    state: directory
 
   loop: "{{userlist}}"
 

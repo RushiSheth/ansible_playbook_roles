@@ -1,0 +1,29 @@
+- name: Install  apache server
+  yum:
+    name: apache2
+    state: latest
+  notify: restart_apache_server
+
+- name: Upload index file to vm1
+  copy:
+    src: vm1.html
+    dest: /var/www/html/index.html
+    mode: '0444'
+
+  when: ansible_facts.hostname = "ansible-c-vm1-7557-1"
+
+- name: Upload index file to vm2 
+  copy:
+    src: vm2.html
+    dest: /var/www/html/index.html
+    mode: '0444'
+
+  when: ansible_facts.hostname = "ansible-c-vm1-7557-2"
+
+- name: Enable apache server
+  systemd:
+    name: apache2
+    enabled: true
+
+
+
