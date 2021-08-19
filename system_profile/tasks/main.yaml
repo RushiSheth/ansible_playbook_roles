@@ -1,0 +1,12 @@
+- name: Find username
+  command: cat whoami
+  register: username
+- name: Write at the end of the file
+  blockinfile:
+    path: /etc/profile
+    insertafter: EOF
+    backup: yes
+    state: present
+    block: |
+      "#This is a test block added by Ansible….{{ username }}"
+      export TMOUT=1800

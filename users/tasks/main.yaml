@@ -1,0 +1,22 @@
+- name: Create a group
+  group:
+    name: cloudadmins
+    gid: 2501
+    state: present
+
+- name: Create a users
+  user: 
+    name: "{{item.name}}"
+    uid: "{{item.uid}}"
+    state: present
+    group: "cloudadmins,wheel"
+    home: /home/"{{item.name}}"
+
+  loop: "{{userlist}}"
+
+- name: Create a ssh key and distribute it
+  community.crypto.openssh_keypair:
+    path: /home/"{{item.name}}"/.ssh/
+  
+  loop: "{{userlist}}"
+
