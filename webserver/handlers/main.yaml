@@ -1,4 +1,5 @@
 - name: restart_apache_server
   systemd: 
-    name: apache2
+    name: httpd
     state: restarted
+    enabled: true

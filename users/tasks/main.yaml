@@ -9,8 +9,8 @@
     name: "{{item.name}}"
     uid: "{{item.uid}}"
     state: present
-    group: cloudadmins,wheel
-    append: true
+    groups: cloudadmins,wheel
+    append: yes
     home: /home/"{{item.name}}"
 
   loop: "{{userlist}}"
@@ -25,6 +25,6 @@
 - name: Create a ssh key and distribute it
   community.crypto.openssh_keypair:
     path: /home/"{{item.name}}"/.ssh/
-  
-  loop: "{{userlist}}"
+    regenerate: full_idempotence
 
+  loop: "{{userlist}}"

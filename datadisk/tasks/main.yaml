@@ -14,7 +14,7 @@
   file:
     path: /part1
     state: directory
-    mode: '0755'
+    mode: "{{ mode }}"
 
 - name: Mount first partition
   mount:
@@ -39,7 +39,7 @@
   file:
     path: /part2
     state: directory
-    mode: '0755'
+    mode: "{{ mode }}"
 
 - name: Mount second partition
   mount:
